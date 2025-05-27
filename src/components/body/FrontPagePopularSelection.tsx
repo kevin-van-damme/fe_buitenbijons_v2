@@ -1,0 +1,25 @@
+import FrontPageCards from "./FrontPageCards";
+
+const FrontPagePopularSelection = () => {
+  return (
+    <div className="h-150">
+      <div className=" flex flex-col mx-auto max-w-6xl">
+        <h3>Choose your style of stay</h3>
+        <div className="mt-5">
+          <ul className="flex flex-row justify-around gap-10">
+            <li>
+              <FrontPageCards />
+            </li>
+            <li>
+              <FrontPageCards />
+            </li>
+            <li>
+              <FrontPageCards />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+};
+export default FrontPagePopularSelection;
