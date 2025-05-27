@@ -1,4 +1,10 @@
+import FrontPageImage from "@/components/FrontPageImage";
+
 const page = () => {
-  return <div>NextWorks</div>;
+  return (
+    <>
+      <FrontPageImage />
+    </>
+  );
 };
 export default page;
