@@ -2,7 +2,7 @@ import Link from "next/link";
 const page = () => {
   return (
     <div className="h-screen bg-gradient-to-br from-blue-100 via-grey-50 to-green-100">
-      <div className="flex flex-col items-center rounded-2xl p-10 bg-white w-120 mx-auto">
+      <div className="flex flex-col items-center rounded-2xl p-10 bg-white w-120 mx-auto shadow-xl/10">
         <h3 className="text-3xl mb-2 font-bold text-slate-800">Welcome Back</h3>
         <form action="" className="flex flex-col gap-7 w-full">
           <div>
