@@ -11,6 +11,7 @@ export async function GET() {
         description: camping.attributes.field_camping_description,
         location: camping.attributes.field_camping_location,
         price_per_night: camping.attributes.field_price_per_night,
+        // image: camping.attributes.field_camping_image.links.href,
       }))
     );
   } catch (error: any) {
