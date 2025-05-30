@@ -2,7 +2,7 @@ const FrontPageImage = () => {
   return (
     <>
       <div>
-        <img src="/home_page_image.jpg" alt="" className="block object-fit w-full h-125 object-cover" />
+        <img src="/frontpage/home_page_image.jpg" alt="" className="block object-fit w-full h-125 object-cover" />
       </div>
     </>
   );
