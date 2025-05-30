@@ -2,7 +2,7 @@ import Link from "next/link";
 const Header = () => {
   return (
     <>
-      <div className="mx-auto flex justify-between max-w-6xl w-full py-5 p-3 text-xl font-semibold text-slate-900 fixed top-0 right-0 left-0">
+      <div className="mx-auto flex justify-between max-w-6xl w-full py-5 p-3 text-xl font-semibold text-slate-900">
         <i>Logo</i>
         <nav>
           <ul className="flex gap-3">
