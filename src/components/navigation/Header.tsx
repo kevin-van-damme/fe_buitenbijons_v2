@@ -28,7 +28,7 @@ const Header = () => {
             </li>
             <li>
               <Link href="/register" className="hover:text-slate-700 transition-all">
-                Register
+                Sign Up
               </Link>
             </li>
           </ul>
