@@ -33,32 +33,31 @@ export interface FieldCampingLocation {
   geohash: string;
   latlon: string;
 }
-export interface Path {
-  alias: null;
-  pid: null;
-  langcode: string;
-}
-export interface ArticleAttributes {
-  drupal_internal__nid: number;
-  drupal_internal__vid: number;
-  langcode: string;
-  revision_timestamp: Date;
-  revision_log: null;
-  status: boolean;
-  title: string;
-  created: Date;
-  changed: Date;
-  promote: boolean;
-  sticky: boolean;
-  default_langcode: boolean;
-  revision_translation_affected: boolean;
-  path: Path;
-  body: Body;
-  comment: Comment;
-}
-export interface Body {
-  value: string;
-  format: string;
-  processed: string;
-  summary: string;
+export interface ArticleNode extends DrupalNode {
+  attributes: {
+    title: string;
+    body: {
+      value: string;
+      format: string;
+      processed: string;
+      summary: string;
+    };
+    field_image?: {
+      data: {
+        type: string;
+        id: string;
+        meta: {
+          alt: string;
+          title: string;
+          width: number;
+          height: number;
+          drupal_internal__target_id: number;
+        };
+      };
+      links: {
+        related: { href: string };
+        self: { href: string };
+      };
+    };
+  };
 }
