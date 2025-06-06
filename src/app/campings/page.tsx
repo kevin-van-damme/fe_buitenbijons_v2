@@ -11,7 +11,6 @@ const page = () => {
         <FrontPageCards />
         <FrontPageCards />
         <FrontPageCards />
-        <FrontPageCards />
       </div>
       <CampingPagePagination />
     </div>

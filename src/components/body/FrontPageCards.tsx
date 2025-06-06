@@ -12,19 +12,17 @@ const FrontPageCards = async () => {
   return (
     <>
       {data && data.length > 0 ? (
-        <Link href="/">
-          <div>
-            <img src="/frontpage/home_page_image.jpg" alt="" className="block object-cover rounded-t-3xl w-full h-full" />
-            <div className="bg-green-800 text-center rounded-b-3xl text-white">
-              {data.map((camping) => (
-                <div key={camping.id}>
-                  <h3 className="text-md">{camping.title}</h3>
-                  <p className="text-lg">{camping.field_camping_description}</p>
-                </div>
-              ))}
+        data.map((camping) => (
+          <Link href="/">
+            <div>
+              <img src="/frontpage/home_page_image.jpg" alt="" className="block object-cover rounded-t-3xl w-full h-full" />
+              <div key={camping.id} className="bg-green-800 py-5 text-center rounded-b-3xl text-white">
+                <h3 className="text-md">{camping.title}</h3>
+                <p className="text-lg">{camping.field_camping_description}</p>
+              </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+        ))
       ) : (
         <p>There seems to be a problem loading the campings...</p>
       )}
