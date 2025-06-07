@@ -1,12 +1,16 @@
-import { DrupalJsonApiParams } from "drupal-jsonapi-params";
-import { DrupalNode } from "next-drupal";
-import { drupal } from "@/lib/drupal";
+// import { DrupalJsonApiParams } from "drupal-jsonapi-params";
+// import { DrupalNode } from "next-drupal";
+// import { drupal } from "@/lib/drupal";
 import type { ArticleNode } from "@/types";
 
 const page = async () => {
-  const res = await fetch("http://localhost:3000/api/articles");
-  const data = await res.json();
-  console.log(data);
+  // const res = await fetch("https://be-buitenbijons-v2.ddev.site:33003/jsonapi/node/article");
+  const res = await fetch("https://be-buitenbijons-v2.ddev.site:33003/jsonapi/node/article", {
+    next: {
+      revalidate: 60,
+    },
+  });
+  const { data } = await res.json();
 
   // const params = new DrupalJsonApiParams()
   //   .addFields("node--article", ["title", "body", "field_image"])
@@ -29,13 +33,14 @@ const page = async () => {
   // console.log(nodes);
 
   return (
+    // <pre>{JSON.stringify(data, null, 2)}</pre>
     <div className="flex flex-col w-300 mx-auto my-10">
       {data && data.length > 0 ? (
         data.map((article: ArticleNode) => (
           <div key={article.id}>
             <h3>{article.title}</h3>
             {/* Render HTML content safely */}
-            <div dangerouslySetInnerHTML={{ __html: article.body.value }} />
+            <div dangerouslySetInnerHTML={{ __html: article.attributes.body.value }} />
           </div>
         ))
       ) : (

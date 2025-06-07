@@ -9,8 +9,6 @@ const page = () => {
       <CampingPageSearchBar />
       <div className="grid grid-cols-3 gap-10 mx-auto max-w-6xl mb-10">
         <FrontPageCards />
-        <FrontPageCards />
-        <FrontPageCards />
       </div>
       <CampingPagePagination />
     </div>

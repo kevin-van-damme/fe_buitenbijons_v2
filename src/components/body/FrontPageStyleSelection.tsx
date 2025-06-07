@@ -1,5 +1,6 @@
 import FrontPageCards from "../body/FrontPageCards";
 import FrontPageStySecCards from "./FrontPageStySecCards";
+import Link from "next/link";
 const FrontPageStyleSelection = () => {
   return (
     <div className="py-10">
@@ -8,13 +9,19 @@ const FrontPageStyleSelection = () => {
         <div className="mt-5">
           <ul className="flex flex-row justify-around gap-10">
             <li>
-              <FrontPageStySecCards />
+              <Link href="">
+                <FrontPageStySecCards />
+              </Link>
             </li>
             <li>
-              <FrontPageStySecCards />
+              <Link href="">
+                <FrontPageStySecCards />
+              </Link>
             </li>
             <li>
-              <FrontPageStySecCards />
+              <Link href="">
+                <FrontPageStySecCards />
+              </Link>
             </li>
           </ul>
         </div>

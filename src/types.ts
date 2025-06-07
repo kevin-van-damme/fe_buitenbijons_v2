@@ -7,6 +7,9 @@ export interface CampingProps {
 export interface Campings {
   data: Camping[];
 }
+export interface CampingData {
+  data: Camping;
+}
 export interface Camping extends DrupalNode {
   id: string;
   attributes: {
@@ -60,4 +63,43 @@ export interface ArticleNode extends DrupalNode {
       };
     };
   };
+}
+export interface LeafletNode extends DrupalNode {}
+
+export interface Message {
+  type: string;
+  message: string;
+  status: number;
+}
+
+export interface User {
+  jsonapi: Jsonapi;
+  data: Datum[];
+  links: Links;
+}
+
+export interface Datum {
+  type: string;
+  id: string;
+  links: Links;
+  attributes: Attributes;
+}
+
+export interface Attributes {
+  display_name: string;
+}
+
+export interface Links {
+  self: Self;
+}
+
+export interface Self {
+  href: string;
+}
+export interface Jsonapi {
+  version: string;
+  meta: Meta;
+}
+export interface Meta {
+  links: Links;
 }

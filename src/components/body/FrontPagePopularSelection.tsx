@@ -1,5 +1,6 @@
 import FrontPageCards from "./FrontPageCards";
 import FrontPagePopSecCards from "./FrontPagePopSecCards";
+import Link from "next/link";
 
 const FrontPagePopularSelection = () => {
   return (
@@ -9,13 +10,19 @@ const FrontPagePopularSelection = () => {
         <div className="mt-5">
           <ul className="flex flex-row justify-around gap-10">
             <li>
-              <FrontPagePopSecCards />
+              <Link href="">
+                <FrontPagePopSecCards />
+              </Link>
             </li>
             <li>
-              <FrontPagePopSecCards />
+              <Link href="">
+                <FrontPagePopSecCards />
+              </Link>
             </li>
-            <li>
-              <FrontPagePopSecCards />
+            <li className="shadow-2xl rounded-2xl">
+              <Link href="">
+                <FrontPagePopSecCards />
+              </Link>
             </li>
           </ul>
         </div>
