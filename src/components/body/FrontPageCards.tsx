@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 const FrontPageCards = async () => {
-  const res = await fetch("https://be-buitenbijons-v2.ddev.site:33003/jsonapi/node/campings", {
+  const res = await fetch("https://be-buitenbijons-v2.ddev.site:33001/jsonapi/node/campings", {
     next: {
       revalidate: 60,
     },

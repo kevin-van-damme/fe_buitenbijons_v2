@@ -4,8 +4,8 @@
 import type { ArticleNode } from "@/types";
 
 const page = async () => {
-  // const res = await fetch("https://be-buitenbijons-v2.ddev.site:33003/jsonapi/node/article");
-  const res = await fetch("https://be-buitenbijons-v2.ddev.site:33003/jsonapi/node/article", {
+  // const res = await fetch("https://be-buitenbijons-v2.ddev.site:33001/jsonapi/node/article");
+  const res = await fetch("https://be-buitenbijons-v2.ddev.site:33001/jsonapi/node/article", {
     next: {
       revalidate: 60,
     },

@@ -4,7 +4,7 @@ import axios from "axios";
 import "leaflet/dist/leaflet.css";
 
 const CampingPageLeaflet = async () => {
-  // const data = await axios.get("https://be-buitenbijons-v2.ddev.site:33003/jsonapi/views/campings/block_2");
+  // const data = await axios.get("https://be-buitenbijons-v2.ddev.site:33001/jsonapi/views/campings/block_2");
 
   return (
     <div className="flex justify-around mx-auto mt-10">
@@ -18,7 +18,7 @@ const CampingPageLeaflet = async () => {
 export default CampingPageLeaflet;
 
 //url naar de json van de leaflet_allcampings block
-// https://be-buitenbijons-v2.ddev.site:33003/jsonapi/views/campings/block_2
+// https://be-buitenbijons-v2.ddev.site:33001/jsonapi/views/campings/block_2
 // key dat ik moet gebruiken is field_camping_location
 // nu is de vraag hoe ik met de lat en long die shit kan laten zien... sheeesh
 /*{

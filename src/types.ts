@@ -1,4 +1,5 @@
 import type { DrupalNode } from "next-drupal";
+import { Url } from "next/dist/shared/lib/router/router";
 
 export interface CampingProps {
   data: DrupalNode;
@@ -16,12 +17,40 @@ export interface Camping extends DrupalNode {
     title: string;
     field_camping_description: string;
     field_camping_location: FieldCampingLocation;
-    field_price_per_night: string;
-    // field_camping_image: {
-    //   links: {
-    //     href: string;
-    //   };
-    // };
+    field_camping_price: string;
+  };
+  relationships: {
+    field_owner_id: {
+      links: {
+        related: {
+          href: {
+            data: {
+              attributes: {
+                title: string;
+                field_owner_mail: string;
+                field_owner_phone: string;
+              };
+            };
+          };
+        };
+      };
+    };
+    field_camping_image: {
+      links: {
+        related: {
+          href: {
+            data: {
+              attributes: {
+                uri: {
+                  url: string;
+                  value: string;
+                };
+              };
+            };
+          };
+        };
+      };
+    };
   };
 }
 export interface FieldCampingLocation {
@@ -102,4 +131,7 @@ export interface Jsonapi {
 }
 export interface Meta {
   links: Links;
+}
+export interface PageParams {
+  id: string;
 }
