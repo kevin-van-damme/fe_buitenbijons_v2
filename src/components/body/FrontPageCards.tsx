@@ -23,7 +23,7 @@ const FrontPageCards = async () => {
     <>
       {data && data.data.length > 0 ? (
         data.data.map((camping) => (
-          <Link href={`/campings/${camping.id}`}>
+          <Link href={`/campings/${camping.id}`} key={camping.id}>
             <div>
               <img src="/frontpage/home_page_image.jpg" alt="" className="block object-cover rounded-t-3xl w-full h-full" />
               <div key={camping.id} className="bg-green-800 py-5 text-center rounded-b-3xl text-white">

@@ -38,11 +38,10 @@ const page = async ({ params }: { params: Promise<PageParams> }) => {
   return (
     <>
       <div className="flex flex-col gap-2 justify-center mx-auto max-w-6xl">
-        <div>
-          <img src={imageUrl} alt={data.data.attributes.title} />
+        <div className="mb-10">
+          <img src={imageUrl} alt={data.data.attributes.title} className="block w-full h-full object-cover rounded-2xl" />
         </div>
-        <h1 className="text-4xl font-bold">{data.data.attributes.title}</h1>
-
+        <h1 className="text-4xl font-bold mb-10">{data.data.attributes.title}</h1>
         <div className="flex flex-row gap-5 justify-between">
           <div className="flex flex-row gap-5 bg-slate-200 w-fit p-5 rounded-2xl">
             Contact
