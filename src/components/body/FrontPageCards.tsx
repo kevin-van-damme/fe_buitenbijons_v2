@@ -1,7 +1,4 @@
 import { Campings } from "@/types";
-import { DrupalJsonApiParams } from "drupal-jsonapi-params";
-import { drupal } from "@/lib/drupal";
-import type { DrupalNode } from "next-drupal";
 import Link from "next/link";
 import type { Metadata } from "next";
 

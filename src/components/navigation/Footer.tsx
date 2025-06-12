@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="bg-slate-400 py-5 px-3">
+    <div className="my-10 py-5 px-3">
       <nav className="mx-auto max-w-6xl flex justify-between">
         <div className="flex gap-3">
           <p>© 2025 BuitenBijOns </p>

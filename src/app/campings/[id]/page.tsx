@@ -1,5 +1,6 @@
+import CampingDetailPageImage from "@/components/detailpage/CampingDetailPageImage";
 import { slugit } from "@/helpers";
-import type { CampingData, Campings, PageParams } from "@/types";
+import type { Camping, CampingData, Campings, PageParams } from "@/types";
 
 export async function generateMetadata({ params }: { params: Promise<PageParams> }) {
   const { id } = await params;
@@ -23,41 +24,35 @@ const page = async ({ params }: { params: Promise<PageParams> }) => {
       revalidate: 60,
     },
   });
-  const data: CampingData = await res.json();
-  // console.log("fetched data", data);
+  const data: Camping = await res.json();
+  console.log("fetched data", data);
   const ownerRes = await fetch(data.data.relationships.field_owner_id.links.related.href);
   const ownerData = await ownerRes.json();
-  // console.log("owner data", ownerData);
-  const imageRes = await fetch(data.data.relationships.field_camping_image.links.related.href);
-  const imageData = await imageRes.json();
-  const baseUrl = "https://be-buitenbijons-v2.ddev.site:33001/";
-  const relativeImageUrl = imageData.data.attributes.uri.url;
-  const imageUrl = `${baseUrl}${relativeImageUrl}`;
-  // console.log("imageUrl", imageUrl);
 
   return (
     <>
-      <div className="flex flex-col gap-2 justify-center mx-auto max-w-6xl">
-        <div className="mb-10">
-          <img src={imageUrl} alt={data.data.attributes.title} className="block w-full h-full object-cover rounded-2xl" />
-        </div>
-        <h1 className="text-4xl font-bold mb-10">{data.data.attributes.title}</h1>
-        <div className="flex flex-row gap-5 justify-between">
-          <div className="flex flex-row gap-5 bg-slate-200 w-fit p-5 rounded-2xl">
-            Contact
-            <p>Owner: {ownerData.data.attributes.title}</p>
-            <a href={`mailto:${ownerData.data.attributes.field_owner_mail}`} className="underline hover:text-blue-500 transition-all ease-in-out">
+      <div className="flex flex-col gap-6 justify-center mx-auto max-w-6xl p-4 bg-white shadow-lg rounded-lg">
+        <CampingDetailPageImage params={params} />
+        <h1 className="text-4xl font-bold text-gray-800 mb-6">{data.data.attributes.title}</h1>
+        <div className="flex flex-col md:flex-row gap-6 justify-between">
+          <div className="flex flex-col gap-4 bg-gray-50 p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold text-gray-700">Contact</h2>
+            <p className="text-gray-600">Owner: {ownerData.data.attributes.title}</p>
+            <a
+              href={`mailto:${ownerData.data.attributes.field_owner_mail}`}
+              className="text-blue-600 hover:text-blue-800 underline transition-colors"
+            >
               Email: {ownerData.data.attributes.field_owner_mail}
             </a>
           </div>
-          <div className="flex flex-row gap-5 bg-slate-200 w-fit p-5 rounded-2xl">
-            <p>Price: €{data.data.attributes.field_camping_price}/night</p>
+          <div className="flex flex-col gap-4 bg-gray-50 p-6 rounded-lg shadow-md">
+            <p className="text-gray-600">Price: €{data.data.attributes.field_camping_price}/night</p>
           </div>
         </div>
-        <div className="px-20 py-10 bg-green-200 rounded-2xl">
-          <p>{data.data.attributes.field_camping_description}</p>
+        <div className="p-6 bg-gray-50 rounded-lg shadow-md">
+          <p className="text-gray-700" dangerouslySetInnerHTML={{ __html: data.data.attributes.field_camping_description.value }} />
         </div>
-        <p>{data.data.attributes.field_camping_location.value}</p>
+        <p className="text-gray-600">{data.data.attributes.field_camping_location.value}</p>
       </div>
       {/* <pre>{JSON.stringify(data.data, null, 2)}</pre> */}
     </>

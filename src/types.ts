@@ -51,6 +51,22 @@ export interface Camping extends DrupalNode {
         };
       };
     };
+    field_image: {
+      links: {
+        related: {
+          href: {
+            data: {
+              attributes: {
+                uri: {
+                  url: string;
+                  value: string;
+                };
+              };
+            };
+          };
+        };
+      };
+    };
   };
 }
 export interface FieldCampingLocation {

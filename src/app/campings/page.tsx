@@ -2,7 +2,8 @@ import CampingPageLeaflet from "@/components/body/CampingPageLeaflet";
 import CampingPagePagination from "@/components/body/CampingPagePagination";
 import CampingPageSearchBar from "@/components/body/CampingPageSearchBar";
 import FrontPageCards from "@/components/body/FrontPageCards";
-const page = () => {
+
+const page = async () => {
   return (
     <div className="flex flex-col gap-10 mx-auto">
       <CampingPageLeaflet />
