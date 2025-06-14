@@ -1,30 +1,29 @@
-import { Campings } from "@/types";
+import { Camping, Campings } from "@/typesCampings";
 import Link from "next/link";
 import type { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Campings",
   description: "Campings in Belgium",
 };
 
-const FrontPageCards = async () => {
-  const res = await fetch("https://be-buitenbijons-v2.ddev.site:33001/jsonapi/node/campings", {
-    next: {
-      revalidate: 60,
-    },
-  });
-  const data: Campings = await res.json();
-  //console.log(data);
-
+const FrontPageCards = async ({ campings }: { campings: Camping[] }) => {
   return (
-    <>
-      {data && data.data.length > 0 ? (
-        data.data.map((camping) => (
-          <Link href={`/campings/${camping.id}`} key={camping.id}>
+    <div className="grid grid-cols-3 gap-5">
+      {campings?.length > 0 ? (
+        campings.map((camping: Camping) => (
+          <Link href={`campings/${camping.nid[0].value}`} key={camping.nid[0].value}>
             <div>
-              <img src="/frontpage/home_page_image.jpg" alt="" className="block object-cover rounded-t-3xl w-full h-full" />
-              <div key={camping.id} className="bg-green-800 py-5 text-center rounded-b-3xl text-white">
-                <h3 className="text-md">{camping.attributes.title}</h3>
+              <Image
+                src={camping.field_camping_image[0].url}
+                alt={camping.field_camping_image[0].alt}
+                width={camping.field_camping_image[0].width}
+                height={camping.field_camping_image[0].height}
+                className="block object-cover rounded-t-3xl w-full h-full"
+              />
+              <div className="bg-green-800 py-5 text-center rounded-b-3xl text-white">
+                <h3 className="text-md">{camping.title.value}</h3>
               </div>
             </div>
           </Link>
@@ -32,7 +31,7 @@ const FrontPageCards = async () => {
       ) : (
         <p>There seems to be a problem loading the campings...</p>
       )}
-    </>
+    </div>
   );
 };
 

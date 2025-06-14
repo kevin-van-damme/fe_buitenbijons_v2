@@ -151,3 +151,8 @@ export interface Meta {
 export interface PageParams {
   id: string;
 }
+export interface SearchParams {
+  name: string | undefined;
+  min: string | undefined;
+  max: string | undefined;
+}

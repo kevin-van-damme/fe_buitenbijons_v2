@@ -1,39 +1,39 @@
 import CampingDetailPageImage from "@/components/detailpage/CampingDetailPageImage";
-import { slugit } from "@/helpers";
-import type { Camping, CampingData, Campings, PageParams } from "@/types";
+import type { PageParams } from "@/types";
+import type { Camping } from "@/typesCampings";
 
 export async function generateMetadata({ params }: { params: Promise<PageParams> }) {
   const { id } = await params;
-  const res = await fetch(`https://be-buitenbijons-v2.ddev.site:33001/jsonapi/node/campings/${id}`, {
+  const res = await fetch(`https://be-buitenbijons-test.ddev.site:33001/api/v1/campings/${id}`, {
     next: {
       revalidate: 60,
     },
   });
-  const data: CampingData = await res.json();
+  const data: Camping = await res.json();
   return {
-    title: data.data.attributes.title,
-    description: data.data.attributes.field_camping_description,
-    owner: data.data.relationships.field_owner_id.links.related.href,
+    title: data.title.value,
+    description: data.field_camping_description[0].value,
+    owner: data.field_owner_id[0].target_uuid,
   };
 }
 
 const page = async ({ params }: { params: Promise<PageParams> }) => {
   const { id } = await params;
-  const res = await fetch(`https://be-buitenbijons-v2.ddev.site:33001/jsonapi/node/campings/${id}`, {
+  const res = await fetch(`https://be-buitenbijons-test.ddev.site:33001/api/v1/campings/${id}`, {
     next: {
       revalidate: 60,
     },
   });
   const data: Camping = await res.json();
   console.log("fetched data", data);
-  const ownerRes = await fetch(data.data.relationships.field_owner_id.links.related.href);
+  const ownerRes = await fetch(data.field_owner_id[0].target_uuid);
   const ownerData = await ownerRes.json();
 
   return (
     <>
       <div className="flex flex-col gap-6 justify-center mx-auto max-w-6xl p-4 bg-white shadow-lg rounded-lg">
         <CampingDetailPageImage params={params} />
-        <h1 className="text-4xl font-bold text-gray-800 mb-6">{data.data.attributes.title}</h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-6">{data.title.value}</h1>
         <div className="flex flex-col md:flex-row gap-6 justify-between">
           <div className="flex flex-col gap-4 bg-gray-50 p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold text-gray-700">Contact</h2>
@@ -46,13 +46,13 @@ const page = async ({ params }: { params: Promise<PageParams> }) => {
             </a>
           </div>
           <div className="flex flex-col gap-4 bg-gray-50 p-6 rounded-lg shadow-md">
-            <p className="text-gray-600">Price: €{data.data.attributes.field_camping_price}/night</p>
+            <p className="text-gray-600">Price: €{data.field_camping_price.value}/night</p>
           </div>
         </div>
         <div className="p-6 bg-gray-50 rounded-lg shadow-md">
-          <p className="text-gray-700" dangerouslySetInnerHTML={{ __html: data.data.attributes.field_camping_description.value }} />
+          <p className="text-gray-700" dangerouslySetInnerHTML={{ __html: data.field_camping_description[0].value }} />
         </div>
-        <p className="text-gray-600">{data.data.attributes.field_camping_location.value}</p>
+        <p className="text-gray-600">{data.field_camping_location.value}</p>
       </div>
       {/* <pre>{JSON.stringify(data.data, null, 2)}</pre> */}
     </>
@@ -66,8 +66,8 @@ export async function generateStaticParams() {
       revalidate: 60,
     },
   });
-  const data: Campings = await res.json();
-  return data.data.map((camping) => ({
-    id: camping.id,
+  const data: Camping[] = await res.json();
+  return data.map((camping) => ({
+    id: camping.type.target_uuid,
   }));
 }
