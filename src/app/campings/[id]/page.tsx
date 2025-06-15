@@ -1,6 +1,6 @@
 import CampingDetailPageImage from "@/components/detailpage/CampingDetailPageImage";
-import type { PageParams } from "@/types";
-import type { Camping } from "@/typesCampings";
+import type { CampingData, PageParams } from "@/types";
+import type { Camping, Campings } from "@/typesCampings";
 
 export async function generateMetadata({ params }: { params: Promise<PageParams> }) {
   const { id } = await params;
@@ -66,8 +66,8 @@ export async function generateStaticParams() {
       revalidate: 60,
     },
   });
-  const data: Camping[] = await res.json();
-  return data.map((camping) => ({
-    id: camping.type.target_uuid,
+  const data: Campings = await res.json();
+  return data.data.map((camping: Camping) => ({
+    id: camping.uuid.value,
   }));
 }

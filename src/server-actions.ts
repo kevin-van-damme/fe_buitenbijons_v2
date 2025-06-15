@@ -3,41 +3,66 @@
 import type { Message } from "@/types";
 import { badWords } from "@/badWords";
 
-export const handleFormSubmit = async (initState: Message, fd: FormData): Promise<Message> => {
-  const email = fd.get("email") as string;
-  const username = fd.get("username") as string;
-  const password = fd.get("password") as string;
-  const verifyPassword = fd.get("verifyPassword") as string;
+export const handleFormSubmit = async (prevState: Message, formData: FormData): Promise<Message> => {
+  const email = formData.get("email") as string;
+  const username = formData.get("username") as string;
+  const password = formData.get("password") as string;
+  const verifyPassword = formData.get("verifyPassword") as string;
+  let picture = formData.get("picture");
 
   if (!email || !username || !password || !verifyPassword) {
-    return { type: "errorAllFields", message: "All fields are required", status: 400 };
+    return { type: "error", message: "All fields are required", status: 400 };
   }
-  if (!email) {
-    return { type: "errorEmail", message: "Please enter an email address", status: 400 };
-  }
+
   if (!email.includes("@")) {
-    return { type: "errorValidEmail", message: "Please enter a valid email address", status: 400 };
+    return { type: "error", message: "Email must be valid", status: 400 };
   }
-  if (badWords.some((word) => email.trim().toLowerCase().includes(word))) {
-    return { type: "errorBadWord", message: "Email contains profanity", status: 400 };
+
+  if (badWords.some((word) => email.toLowerCase().includes(word))) {
+    return { type: "error", message: "Profanity not allowed in email", status: 400 };
   }
-  if (!username) {
-    return { type: "errorValidUsername", message: "Please enter a valid username", status: 400 };
+
+  if (badWords.some((word) => username.toLowerCase().includes(word))) {
+    return { type: "error", message: "Profanity not allowed in username", status: 400 };
   }
-  if (badWords.some((word) => username.trim().toLowerCase().includes(word))) {
-    return { type: "errorBadWord", message: "Username contains profanity", status: 400 };
+
+  if (username.trim().length < 3 || username.trim().length > 20) {
+    return { type: "error", message: "Username must be 3–20 characters", status: 400 };
   }
-  if (username.trim().length < 3) {
-    return { type: "errorUsernameMinLength", message: "Username must be at least 3 characters long", status: 400 };
+
+  if (password.length < 8) {
+    return { type: "error", message: "Password must be at least 8 characters", status: 400 };
   }
-  if (username.trim().length > 20) {
-    return { type: "errorUsernameMaxLength", message: "Username must be less than 20 characters long", status: 400 };
+
+  if (password !== verifyPassword) {
+    return { type: "error", message: "Passwords do not match", status: 400 };
   }
-  if (password.trim().length < 8) {
-    return { type: "errorPasswordMinLength", message: "Password must be at least 8 characters long", status: 400 };
+
+  if (!picture) {
+    picture = "./defaultavatar/default_profile_picture.png";
   }
-  if (password.trim() !== verifyPassword.trim()) {
-    return { type: "errorPasswordMatch", message: "Passwords do not match", status: 400 };
+
+  try {
+    const res = await fetch("https://be-buitenbijons-test.ddev.site:33001/user/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, username, password, verifyPassword, picture }),
+    });
+
+    const data = await res.json();
+
+    return {
+      type: data.type || "success",
+      message: data.message || "Account created successfully",
+      status: res.status,
+    };
+  } catch (error) {
+    return {
+      type: "error",
+      message: "Failed to register. Please try again later.",
+      status: 500,
+    };
   }
-  return { type: "success", message: "Account created successfully", status: 201 };
 };

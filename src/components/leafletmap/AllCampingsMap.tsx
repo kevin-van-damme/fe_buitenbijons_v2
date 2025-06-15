@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const AllCampingsMap = ({ campings }: { campings: Camping[] }) => {
   return (
-    <MapContainer className="w-screen h-screen" zoom={7} maxZoom={18} center={[50.68072319026102, 5.299799969579857]}>
+    <MapContainer className="w-full h-175" zoom={7} maxZoom={18} center={[50.68072319026102, 5.299799969579857]}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -20,7 +20,7 @@ const AllCampingsMap = ({ campings }: { campings: Camping[] }) => {
             .map((camping) => (
               <Marker key={camping.nid[0].value} position={[camping.field_camping_location.lat, camping.field_camping_location.lon]}>
                 <Popup>
-                  <Image src={camping.field_camping_image[0].url} width={400} height={100} alt={camping.field_camping_image[0].alt} />
+                  <Image src={camping.field_camping_image[0].url} width={200} height={200} alt={camping.field_camping_image[0].alt} />
                   <p>{camping.title.value}</p>
                 </Popup>
               </Marker>

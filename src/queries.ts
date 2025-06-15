@@ -1,11 +1,15 @@
 import type { Campings, User } from "./types";
-import type { ArticleNode } from "./types";
 import axios from "axios";
+import { Article } from "./typesArticles";
 
 // GET
 export const getCampingsDrupalQuery = async (): Promise<Campings> => {
   try {
-    const res = await fetch("https://be-buitenbijons-v2.ddev.site:33001/jsonapi/node/campings");
+    const res = await fetch("https://be-buitenbijons-test.ddev.site:33001/api/v1/campings", {
+      next: {
+        revalidate: 60,
+      },
+    });
     const data: Campings = await res.json();
     return data;
   } catch (error) {
@@ -21,10 +25,14 @@ export const getCampingByIdDrupalQuery = async (id: string): Promise<Campings> =
     throw error;
   }
 };
-export const getArticleDrupalQuery = async (): Promise<ArticleNode> => {
+export const getArticleDrupalQuery = async (): Promise<Article[]> => {
   try {
-    const res = await fetch("https://be-buitenbijons-v2.ddev.site:33001/jsonapi/node/article");
-    const data: ArticleNode = await res.json();
+    const res = await fetch("https://be-buitenbijons-test.ddev.site:33001/api/v1/articles", {
+      next: {
+        revalidate: 60,
+      },
+    });
+    const data: Article[] = await res.json();
     return data;
   } catch (error) {
     throw error;

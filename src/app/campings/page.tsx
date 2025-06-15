@@ -1,10 +1,9 @@
-import CampingPageLeaflet from "@/components/body/CampingPageLeaflet";
 import CampingPagePagination from "@/components/body/CampingPagePagination";
 import CampingPageSearchBar from "@/components/body/CampingPageSearchBar";
 import FrontPageCards from "@/components/body/FrontPageCards";
 import type { SearchParams } from "@/types";
 import Map from "@/components/leafletmap/Map";
-import type { Camping, Campings } from "@/typesCampings";
+import type { Camping } from "@/typesCampings";
 
 const page = async ({ searchParams }: { searchParams: SearchParams }) => {
   const res = await fetch("https://be-buitenbijons-test.ddev.site:33001/api/v1/campings", {

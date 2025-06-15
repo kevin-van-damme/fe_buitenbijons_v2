@@ -1,16 +1,12 @@
-import type { Camping } from "@/types";
+import { getArticleDrupalQuery } from "@/queries";
+import Image from "next/image";
 
-const AboutPageImage = async ({ data }: { data: Camping }) => {
-  const resImage = await fetch(data.data.relationships.field_image.links.related.href);
-  const imageData = await resImage.json();
-  const relativeImageUrl = imageData.data.attributes.uri.url;
-  const baseUrl = "https://be-buitenbijons-v2.ddev.site:33001/";
-  const imageUrl = `${baseUrl}${relativeImageUrl}`;
-  console.log(relativeImageUrl);
-  console.log(imageUrl);
+const AboutPageImage = async () => {
+  const data = await getArticleDrupalQuery();
+
   return (
-    <div className="flex flex-row gap-10">
-      <img src={imageUrl} alt="About" className="w-1/2 h-1/2 object-cover rounded-2xl" />
+    <div className="flex flex-row gap-10 mx-auto justify-center">
+      <Image src={data[0].field_image[0].url} alt="About" className="w-1/2 h-1/2 object-cover rounded-2xl" width={500} height={500} />
     </div>
   );
 };

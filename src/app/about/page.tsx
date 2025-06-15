@@ -6,7 +6,7 @@ const page = async ({ data }: { data: Camping }) => {
   return (
     // <pre>{JSON.stringify(data, null, 2)}</pre>
     <div className="flex flex-col w-300 mx-auto my-10">
-      {/* <AboutPageImage data={data} /> */}
+      <AboutPageImage />
       <Article />
     </div>
   );
