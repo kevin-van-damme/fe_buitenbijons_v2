@@ -6,7 +6,7 @@ import Map from "@/components/leafletmap/Map";
 import type { Camping } from "@/typesCampings";
 
 const page = async ({ searchParams }: { searchParams: SearchParams }) => {
-  const res = await fetch("https://be-buitenbijons-test.ddev.site:33001/api/v1/campings", {
+  const res = await fetch("https://be-buitenbijons-test.ddev.site:33003/api/v1/campings", {
     next: {
       revalidate: 60,
     },
@@ -15,7 +15,7 @@ const page = async ({ searchParams }: { searchParams: SearchParams }) => {
   const filteredData = data
     .filter((camping) => {
       if (searchParams.name) {
-        return camping.title.value.toLowerCase().indexOf(searchParams.name.toLowerCase()) != -1;
+        return camping.title[0].value.toLowerCase().indexOf(searchParams.name.toLowerCase()) != -1;
       }
       return true;
     })

@@ -43,7 +43,7 @@ export const handleFormSubmit = async (prevState: Message, formData: FormData): 
   }
 
   try {
-    const res = await fetch("https://be-buitenbijons-test.ddev.site:33001/user/register", {
+    const res = await fetch("https://be-buitenbijons-test.ddev.site:33003/user/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,9 +1,10 @@
+import type { Owner } from "./typesOwners";
 export interface Campings {
   data: Camping[];
 }
 export interface Camping {
   nid: Nid[];
-  uuid: { value: string };
+  uuid: { value: string }[];
   vid: Nid[];
   langcode: FieldCampingCheckinout[];
   type: {
@@ -18,7 +19,7 @@ export interface Camping {
   uid: FieldCampingCity[];
   title: {
     value: string;
-  };
+  }[];
   created: Changed[];
   changed: Changed[];
   promote: DefaultLangcode[];
@@ -47,7 +48,7 @@ export interface Camping {
     value: string;
   };
   field_camping_rules: FieldCamping[];
-  field_owner_id: FieldCampingCity[];
+  field_owner_id: Owner[];
 }
 
 export interface Changed {

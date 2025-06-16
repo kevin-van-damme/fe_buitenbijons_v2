@@ -1,19 +1,17 @@
-import { getArticleDrupalQuery } from "@/queries";
+import { getArticleByIdDrupalQuery } from "@/queries";
 import type { Article } from "@/typesArticles";
 
 const Article = async () => {
-  const data = await getArticleDrupalQuery();
+  const data = await getArticleByIdDrupalQuery("bc5613f5-46fc-4c8a-b31c-b15dc50c45ce");
 
   return (
     <>
-      {data && data.length > 0 ? (
-        data.map((article: Article) => (
-          <div key={article.nid[0].value}>
-            <h3>{article.title[0].value}</h3>
-            {/* Render HTML content safely */}
-            <div dangerouslySetInnerHTML={{ __html: article.body[0].value }} />
-          </div>
-        ))
+      {data ? (
+        <div key={data.uuid[0].value}>
+          <h3>{data.title[0].value}</h3>
+          {/* Render HTML content safely */}
+          <div dangerouslySetInnerHTML={{ __html: data.body[0].value }} />
+        </div>
       ) : (
         <p>No content available</p>
       )}

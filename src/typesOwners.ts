@@ -1,17 +1,19 @@
-export interface Camping {
+export interface Owners {
+  data: Owner[];
+}
+
+export interface Owner {
   nid: Nid[];
-  uuid: Langcode[];
+  uuid: FieldOwnerEmail[];
   vid: Nid[];
-  langcode: Langcode[];
+  langcode: FieldOwnerEmail[];
   type: Type[];
   revision_timestamp: Changed[];
   revision_uid: Uid[];
   revision_log: any[];
   status: DefaultLangcode[];
   uid: Uid[];
-  title: {
-    values: string;
-  };
+  title: FieldOwnerEmail[];
   created: Changed[];
   changed: Changed[];
   promote: DefaultLangcode[];
@@ -19,7 +21,9 @@ export interface Camping {
   default_langcode: DefaultLangcode[];
   revision_translation_affected: DefaultLangcode[];
   path: Path[];
-  field_camping_image: FieldCampingImage[];
+  field_owner_email: FieldOwnerEmail[];
+  field_owner_phone: FieldOwnerEmail[];
+  field_owner_profile_picture: any[];
 }
 
 export interface Changed {
@@ -31,18 +35,7 @@ export interface DefaultLangcode {
   value: boolean;
 }
 
-export interface FieldCampingImage {
-  target_id: number;
-  alt: string;
-  title: string;
-  width: number;
-  height: number;
-  target_type: string;
-  target_uuid: string;
-  url: string;
-}
-
-export interface Langcode {
+export interface FieldOwnerEmail {
   value: string;
 }
 

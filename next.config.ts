@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "be-buitenbijons-test.ddev.site",
-        port: "33001",
+        port: "33003",
         pathname: "/**",
       },
     ],

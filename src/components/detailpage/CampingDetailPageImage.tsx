@@ -1,22 +1,19 @@
-import type { Camping, PageParams } from "@/types";
+import type { PageParams } from "@/types";
+import type { Camping } from "@/typesCampings";
 
 const CampingDetailPageImage = async ({ params }: { params: Promise<PageParams> }) => {
   const { id } = await params;
-  const res = await fetch(`https://be-buitenbijons-v2.ddev.site:33001/jsonapi/node/campings/${id}`, {
+  const res = await fetch(`https://be-buitenbijons-test.ddev.site:33003/api/v1/campings/${id}`, {
     next: {
       revalidate: 60,
     },
   });
   const data: Camping = await res.json();
-  const imageRes = await fetch(data.data.relationships.field_camping_image.links.related.href);
-  const imageData = await imageRes.json();
-  const baseUrl = "https://be-buitenbijons-v2.ddev.site:33001/";
-  const relativeImageUrl = imageData.data.attributes.uri.url;
-  const imageUrl = `${baseUrl}${relativeImageUrl}`;
+  const imageUrl = data.field_camping_image[0].url;
 
   return (
     <div className="mb-10">
-      <img src={imageUrl} alt={data.data.attributes.title} className="block w-full h-fit object-cover rounded-t-lg shadow-lg" />
+      <img src={imageUrl} alt={data.title[0].value} className="block w-full h-fit object-cover rounded-t-lg shadow-lg" />
     </div>
   );
 };

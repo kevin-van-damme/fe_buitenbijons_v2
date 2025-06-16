@@ -3,7 +3,7 @@ import Image from "next/image";
 const Header = () => {
   return (
     <>
-      <div className="mx-auto flex justify-between max-w-6xl w-full py-5 p-3 text-xl font-semibold text-slate-900">
+      <div className="mx-auto flex justify-between max-w-6xl w-full py-5 text-xl font-semibold text-slate-900">
         <Link href="/">
           <Image src="/logo/logo_buitenbijons.svg" alt="buitenbijons logo" width={50} height={50} className=" hover:scale-110 transition-all" />
         </Link>

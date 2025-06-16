@@ -1,3 +1,7 @@
+export interface Articles {
+  data: Article[];
+}
+
 export interface Article {
   nid: Nid[];
   uuid: Langcode[];
